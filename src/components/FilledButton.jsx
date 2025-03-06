@@ -1,9 +1,11 @@
 import './FilledButton.css'
 
 const FilledButton = (props)=>{
-    const {color="primary", size="regular"} = props
+
+    const {color="primary", size="regular", onClick} = props
+
     return (
-        <button className={`filled-${color}-color filled-${size}-size`}>
+        <button onClick={onClick} className={`filled-${color}-color filled-${size}-size`}>
             {props.children?props.children:"CTA"}
         </button>
     )

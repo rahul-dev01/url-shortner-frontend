@@ -1,15 +1,16 @@
-#form-container :nth-child(4){
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-#signup-screen > div:nth-child(2) {
+.signup-screen > div:nth-child(2) {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#form-container{
+.signup-form-container > div:first-child{
+    display: flex;
+    flex-direction: column;
+    gap : 10px;
+}
+
+.signup-form-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,14 +18,7 @@
     padding: 40px;
 }
 
-#form-container > div:first-child{
-    display: flex;
-    flex-direction: column;
-    gap : 10px
-}
-
-
-#signup-screen {
+.signup-screen {
     height: 100vh;
     display: flex;
     flex-wrap: wrap;

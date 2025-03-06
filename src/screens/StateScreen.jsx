@@ -1,36 +1,51 @@
-import React from 'react'
+import {useState} from "react"
 
-import { useState } from 'react'
 
 const StateScreen = () => {
-    const [Count, setCount] = useState(0)
+
+//   let count = 0  
+
+    let [count, setCount] = useState(0)
+
+    const [students, setStudents] = useState([])
+
+    const [inputData, setInputData] = useState("")
+
     return (
-        <>
+        <div>
+            <h1>We are learning about state</h1>
+            <button 
+                onClick={()=>{
+                    setCount((prevCount)=>{
+                        return prevCount + 1
+                    })
+                    console.log("Count is ",count)
+                }}
+            >+</button>
+            <p>Count is {count}</p>
+            <button 
+                onClick={()=>{
+                    setCount(count-1)
+                    console.log("Count is ",count)
+                }}
+            >-</button>
             <div>
-                <h1>We are learning about state</h1>
-
+                <p>{inputData}</p>
+                <input onChange={(e)=>{
+                    setInputData(e.target.value)
+                }} type="text" placeholder="Enter Student Name"/>
+                <button onClick={()=>{
+                    setStudents((prevValue)=>{
+                        return [...prevValue, inputData]
+                    })
+                }}>ADD</button>
             </div>
             <div>
-                <button onClick={() => {
-                    setCount(Count + 1)
-                }}>
-                    Add
-                </button>
+                {students.map(name=><p>{name}</p>)}
             </div>
-            <div>
-                <button onClick={() => {
-                    setCount(Count - 1)
-                }}>
-                    Substract
-                </button>
-            </div>
-
-            <div>
-                <h3>Count us : {Count}</h3>
-
-            </div>
-        </>
+        </div>
     )
+
 }
 
 export default StateScreen

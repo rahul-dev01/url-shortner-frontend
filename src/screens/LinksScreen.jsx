@@ -1,142 +1,109 @@
 import LinkCard from './../components/LinkCard'
+import LinkInputContainer from '../components/LinkInputContainer';
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
+
+import { useNavigate } from 'react-router-dom';
+
+const {VITE_APP_BACKEND_API_BASE_URL} = import.meta.env
 
 import './LinksScreen.css'
 
 const LinksScreen = ()=>{
 
-    const data = [
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/1AABqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/xz1a23",
-          clickedCount: 15,
-          createDate: "10th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/2BBqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/hdy72k",
-          clickedCount: 8,
-          createDate: "12th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/3CCqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/jsk82l",
-          clickedCount: 20,
-          createDate: "14th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/4DDqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/ncq72o",
-          clickedCount: 5,
-          createDate: "16th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/5EEqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/qpo91z",
-          clickedCount: 12,
-          createDate: "18th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/6FFqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/xmx45w",
-          clickedCount: 18,
-          createDate: "20th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/7GGqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/lko29a",
-          clickedCount: 9,
-          createDate: "22nd Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/8HHqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/bmh10v",
-          clickedCount: 7,
-          createDate: "24th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/9IIqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/gzt23y",
-          clickedCount: 14,
-          createDate: "26th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/10JJqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/rmk18s",
-          clickedCount: 6,
-          createDate: "28th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/11KKqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/vcz72t",
-          clickedCount: 13,
-          createDate: "30th Jan 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/12LLqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/bwp92e",
-          clickedCount: 19,
-          createDate: "1st Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/13MMqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/dyo58p",
-          clickedCount: 11,
-          createDate: "3rd Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/14NNqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/lnw37m",
-          clickedCount: 4,
-          createDate: "5th Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/15OOqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/jpf39r",
-          clickedCount: 17,
-          createDate: "7th Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/16PPqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/vtb64u",
-          clickedCount: 10,
-          createDate: "9th Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/17QQqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/gmq47z",
-          clickedCount: 21,
-          createDate: "11th Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/18RRqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/xdr20x",
-          clickedCount: 9,
-          createDate: "13th Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/19SSqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/rqz74s",
-          clickedCount: 16,
-          createDate: "15th Feb 2025"
-        },
-        {
-          originalURL: "https://docs.google.com/spreadsheets/d/20TTqiqBwD6xkTTkNJ0BjObivPYYPQeSfuQiIH9qj_Ko/edit?gid=0",
-          redirectURL: "https://shotify.in/zlo98v",
-          clickedCount: 22,
-          createDate: "17th Feb 2025"
+    const navigate = useNavigate()
+
+    const [urlsData, setUrlsData] = useState([])
+
+    const [toggleFlag, setToggleFlag] = useState(false)
+ 
+    useEffect(()=>{
+      (async()=>{
+        
+        // first check token is present in the localstorage or not
+        const token = localStorage.getItem("token")
+        if(!token){
+          navigate("/auth/signin")
         }
-    ];
+
+        // if present that's mean user is signedin user, we can call fetch all urls of user api 
+        const API_URL = VITE_APP_BACKEND_API_BASE_URL + "/user/urls"
+        const config = {
+          headers : {
+            'Authorization' : `Bearer ${token}`
+          }
+        }
+
+
+        try{
+
+          const urlsApiResponse = await axios.get(API_URL, config)
+          const {success, message, data} = urlsApiResponse.data
+
+          if(success && data.length>0){
+            setUrlsData(data)
+          }
+
+        }catch(err){
+
+          alert("Error whiling featching the URLS")
+
+        }
+        })()
+
+    },[toggleFlag])
+
+    function formatDate(timestamp) {
+      const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const year = date.getFullYear();
+      
+      return `${day}/${month}/${year}`;
+    }
+
+    // const [count, setCount] = useState(0)
+
+    // const [playersCount, setPlayersCount] = useState(0)
+
+    // this is an example of mount/render case
+    // useEffect(()=>{
+    //   console.log("I am showing you how render/mount lifecycle of component looks like")
+    // },[])
+
+    // this is an example of mount/render + rerendering case
+    // useEffect(()=>{
+    //   console.log("count - I am showing you how render/mount + rerendering lifecycle of component looks like")
+    // },[count])
+
+    // useEffect(()=>{
+    //   console.log("playersCount - I am showing you how render/mount + rerendering lifecycle of component looks like")
+    // },[playersCount])
+
+    // useEffect(()=>{
+    //   console.log("I will run every time") 
+    // })
 
     return (
         <div id='links-screen'>
             <h1>Links</h1>
+            {/*<button onClick={()=>{
+              setCount(prevCount=>prevCount+1)
+            }}>ADD</button>*/}
+            {/*<button
+              onClick={()=>{
+                setPlayersCount(prevCount=>prevCount+1)
+              }}
+            >ADD Player</button>*/}
+            <LinkInputContainer setToggleFlag={setToggleFlag}/>
             <div className='links-container'>
-                {data.map((element)=>{
+                {urlsData.map((element)=>{
                     return <LinkCard 
-                        originalURL={element.originalURL}
-                        redirectURL={element.redirectURL}
+                        originalURL={element.originalUrl}
+                        redirectURL={VITE_APP_BACKEND_API_BASE_URL.split("/api/v1")[0]+`/${element.keyId}`}
                         clickedCount={element.clickedCount}
-                        createDate={element.createDate}
+                        createDate={formatDate(element.createdAt)}
                     />
                 })}
             </div>

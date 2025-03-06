@@ -1,0 +1,17 @@
+.input-container {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container input {
+    width: 50vw;
+    height : 40px;
+}
+
+.input-container button {
+    background-color: orange;
+    height: 40px;
+    padding: 0px 20px;
+}
