@@ -21,13 +21,13 @@ const LinksScreen = ()=>{
     useEffect(()=>{
       (async()=>{
         
-        // first check token is present in the localstorage or not
+
         const token = localStorage.getItem("token")
         if(!token){
           navigate("/auth/signin")
         }
 
-        // if present that's mean user is signedin user, we can call fetch all urls of user api 
+     
         const API_URL = VITE_APP_BACKEND_API_BASE_URL + "/user/urls"
         const config = {
           headers : {
@@ -63,39 +63,11 @@ const LinksScreen = ()=>{
       return `${day}/${month}/${year}`;
     }
 
-    // const [count, setCount] = useState(0)
-
-    // const [playersCount, setPlayersCount] = useState(0)
-
-    // this is an example of mount/render case
-    // useEffect(()=>{
-    //   console.log("I am showing you how render/mount lifecycle of component looks like")
-    // },[])
-
-    // this is an example of mount/render + rerendering case
-    // useEffect(()=>{
-    //   console.log("count - I am showing you how render/mount + rerendering lifecycle of component looks like")
-    // },[count])
-
-    // useEffect(()=>{
-    //   console.log("playersCount - I am showing you how render/mount + rerendering lifecycle of component looks like")
-    // },[playersCount])
-
-    // useEffect(()=>{
-    //   console.log("I will run every time") 
-    // })
 
     return (
         <div id='links-screen'>
             <h1>Links</h1>
-            {/*<button onClick={()=>{
-              setCount(prevCount=>prevCount+1)
-            }}>ADD</button>*/}
-            {/*<button
-              onClick={()=>{
-                setPlayersCount(prevCount=>prevCount+1)
-              }}
-            >ADD Player</button>*/}
+          
             <LinkInputContainer setToggleFlag={setToggleFlag}/>
             <div className='links-container'>
                 {urlsData.map((element)=>{

@@ -10,38 +10,58 @@ import OutlinedButton from "./OutlinedButton";
 import './LinkCard.css'
 
 const LinkCard = (props) => {
-  
-  const {redirectURL, originalURL, clickedCount, createDate} = props
+  const { redirectURL, originalURL, clickedCount, createDate } = props;
+
+ 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(redirectURL)
+      .then(() => {
+        alert("Link copied to clipboard!");
+      })
+      .catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
+ 
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Check this out!",
+        url: redirectURL,
+      })
+      .catch((error) => {
+        console.error("Error sharing:", error);
+      });
+    } else {
+      alert("Share not supported on this browser. Copy the link instead.");
+    }
+  };
 
   return (
     <div className="link-card">
-      {/* Link Details */}
       <div className="link-details">
-        
         <div>
-          <a href={redirectURL}>{redirectURL.split("://")[1]}</a>
+          <a href={redirectURL} target="_blank" rel="noopener noreferrer">
+            {redirectURL.split("://")[1]}
+          </a>
         </div>
-
         <div>
           <p>{originalURL}</p>
         </div>
-
         <div className="link-stats">
           <div><IoStatsChart /> {clickedCount} impressions</div>
-          <div><MdDateRange/> {createDate}</div>
+          <div><MdDateRange /> {createDate}</div>
         </div>
-
       </div>
-      {/* Buttons */}
+
       <div className="cta-groups">
-        <div><FilledButton><FaCopy/> Copy</FilledButton></div>
-        <div><OutlinedButton color="secondary"><FaShareAlt/> Share</OutlinedButton></div>
-        <div><OutlinedButton color="danger"><MdEdit/> Edit</OutlinedButton></div>
+        <div><FilledButton onClick={handleCopy}><FaCopy /> Copy</FilledButton></div>
+        <div><OutlinedButton color="secondary" onClick={handleShare}><FaShareAlt /> Share</OutlinedButton></div>
+        <div><OutlinedButton color="danger"><MdEdit /> Edit</OutlinedButton></div>
       </div>
     </div>
-  )
+  );
+};
 
-}
-
-export default LinkCard
-
+export default LinkCard;
