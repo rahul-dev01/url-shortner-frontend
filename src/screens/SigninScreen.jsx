@@ -7,13 +7,15 @@ import axios from "axios";
 
 import AppContext from "../context";
 
-const {VITE_APP_BACKEND_API_BASE_URL} = import.meta.env
+
 
 import { Link, useNavigate } from "react-router-dom"
 
 import './SigninScreen.css'
 
 import SignInImage from './../assets/images/arranging-files.png'
+
+const { VITE_APP_BACKEND_API_BASE_URL } = import.meta.env
 
 const SigninScreen = (props) => {
 
