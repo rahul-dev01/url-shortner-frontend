@@ -1,3 +1,5 @@
+import "./FullNameInput.css"
+
 const FullNameInput = ({ setFullName }) => {
   return (
     <div className="fullname-input-container">
@@ -6,7 +8,7 @@ const FullNameInput = ({ setFullName }) => {
         onChange={(e) => setFullName(e.target.value)}
         id="fullname-input"
         type="text"
-        placeholder="Enter your full name"
+
       />
     </div>
   );
